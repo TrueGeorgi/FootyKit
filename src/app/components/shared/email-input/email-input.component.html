@@ -1,0 +1,15 @@
+<div class="email-container">
+    <mat-form-field>
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        [formControl]="email"
+        (ngModelChange)="onEmailChange()"
+        (blur)="updateErrorMessage()"
+        required
+      />
+        <mat-error *ngIf="email.invalid">{{errorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+  

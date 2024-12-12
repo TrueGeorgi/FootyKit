@@ -1,0 +1,13 @@
+06.dec.2024:
+    Created:
+        Header
+        Home
+        Footer
+    In progress:
+        Authentication
+    Saved notes:
+        Провери как работи имейл инпута на Angular Material
+        how to push in gitHub:
+            git init
+            git add .
+            git commit -am "title

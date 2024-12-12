@@ -1,0 +1,19 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  mat-toolbar {
+    background-color: rgb(152, 218, 139);
+    color: rgb(41, 37, 37);
+    font-size: 20px;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    width: 235px;
+  }
+
+  .login:hover, .register:hover, .loggout:hover, .title {
+    cursor: pointer;
+  }

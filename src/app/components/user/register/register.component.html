@@ -1,0 +1,13 @@
+<div class="register-container" (keydown.enter)="register()">
+    <div class="title">Register Form</div>
+    <app-email-input (emailChange)="onEmailChange($event)"></app-email-input>
+    <fa-icon 
+    matTooltip="The password must be at least 6 symbols long" 
+    [icon]="faCircleInfo" 
+    style="align-self: flex-end;"></fa-icon>
+    <app-password-input [passwordMessage]="passwordMessage" (passwordChange)="onPasswordChange($event)"></app-password-input>
+    <app-password-input [passwordMessage]="repeatPasswordMessage" (passwordChange)="onRepeatPasswordChange($event)"></app-password-input>
+    <button class="submit-button" [disabled]="isDisabled()"  (click)="register()">Submit</button>
+    <div *ngIf="registrationMessage !== ''" [ngClass]="successfulRegistration ? 'registered' : 'not-registered'">{{registrationMessage}}</div>
+</div>
+

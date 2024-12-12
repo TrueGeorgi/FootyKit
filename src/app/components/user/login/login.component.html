@@ -1,0 +1,6 @@
+<div class="login-container" (keydown.enter)="login()">
+    <div class="title">Login</div>
+    <app-email-input (emailChange)="onEmailChange($event)"></app-email-input>
+    <app-password-input [passwordMessage]="'Enter your password'" (passwordChange)="onPasswordChange($event)"></app-password-input>
+    <button class="login-button" [disabled]="isDisabled()"  (click)="login()">Login</button>
+</div>
