@@ -11,9 +11,9 @@
   .nav {
     display: flex;
     justify-content: space-between;
-    width: 235px;
+    width: 135px;
   }
 
-  .login:hover, .register:hover, .loggout:hover, .title {
+  .login:hover, .register:hover, .logout:hover, .title {
     cursor: pointer;
   }

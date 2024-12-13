@@ -3,7 +3,7 @@
     <app-email-input (emailChange)="onEmailChange($event)"></app-email-input>
     <fa-icon 
     matTooltip="The password must be at least 6 symbols long" 
-    [icon]="faCircleInfo" 
+    [icon]="getIconCircleInfo()" 
     style="align-self: flex-end;"></fa-icon>
     <app-password-input [passwordMessage]="passwordMessage" (passwordChange)="onPasswordChange($event)"></app-password-input>
     <app-password-input [passwordMessage]="repeatPasswordMessage" (passwordChange)="onRepeatPasswordChange($event)"></app-password-input>

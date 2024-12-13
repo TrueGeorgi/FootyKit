@@ -1,0 +1,202 @@
+.main {
+    margin-bottom: 30px;
+    background-color: rgb(152, 218, 139);
+    padding: 20px 50px;
+    border-radius: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center; 
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title div {
+    font-style: italic;
+    background-color: rgb(252, 249, 249);
+    padding: 15px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19); /* Adds depth */
+    transform: translateZ(0); /* Enhances 3D effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transitions */
+}
+
+.pb-main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px; /* Optional gap between columns */
+    padding: 20px;
+}
+
+.image-main-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 10px;
+}
+
+.pic-container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.pic-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.buttons-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px;
+}
+
+.buttons-container .btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-like {
+    background-color: #218838;
+}
+
+.btn-like:hover {
+    background-color: #176d2a;
+}
+
+.btn-like:active {
+    transform: scale(0.95);
+    background-color: #218838;
+}
+
+.btn-like-disabled {
+    background-color: #7c9e83;
+}
+
+.btn-dislike {
+    background-color: #dc3545;
+}
+
+.btn-dislike:hover {
+    background-color: #b92332;
+}
+
+.btn-dislike:active {
+    transform: scale(0.95);
+    background-color: #9e1522;
+}
+
+.btn-dislike-disabled {
+    background-color: #ce949a;
+}
+
+.likes-count {
+    background-color: #70816d;
+    color: #000000;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+    display: flex;
+    width: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.likes-positive {
+    background-color: #77e48e;
+}
+
+.likes-negative {
+ background-color: #ec6f7c;
+}
+
+.comments-main-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.input-main-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.comment-input {
+    width: 100%;
+  }
+
+.btn-submit {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 40px;
+}
+
+.btn-submit-active:hover {
+    background-color: #176d2a;
+}
+
+.btn-submit-active {
+    background-color: #218838;
+}
+
+.btn-submit-active:active {
+    transform: scale(0.95);
+    background-color: #0f5a1f;
+}
+
+.btn-submit-disabled {
+    background-color: #7c9e83;
+}
+
+.show-comments-container {
+    display: block;
+    margin-top: 10px;
+}
+
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #555;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}

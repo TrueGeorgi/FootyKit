@@ -1,12 +1,15 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmailInputComponent } from "../../shared/email-input/email-input.component";
 import { PasswordInputComponent } from "../../shared/password-input/password-input.component";
 import { AuthenticationService } from '../../../services/user/authentication.service';
 import { FormControl } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { IconsService } from '../../../services/icons.service';
+
 
 @Component({
   selector: 'app-register',
@@ -16,10 +19,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 })
 export class RegisterComponent {
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private router: Router, private iconsService: IconsService) {
     
   }
-  faCircleInfo = faCircleInfo;
+  
+_snackBar = inject(MatSnackBar);
+
 passwordMessage: string = "Enter your password"
 repeatPasswordMessage: string = "Repeat the password"
 
@@ -33,16 +38,16 @@ successfulRegistration: boolean = false;
 
 register(): void {
 
-  this.authService
-  .register(this.email.value, this.password, this.repeatedPassword)
-  .then((message) => {
-    this.registrationMessage = message
-    this.successfulRegistration = true;
-  })
-  .catch((error) => {
-    this.registrationMessage = error
-    this.successfulRegistration = false;
-  });
+  this.authService.register(this.email.value, this.password, this.repeatedPassword).subscribe(
+    () => {
+      this.router.navigate([''])
+      this._snackBar.open('User registered successfully', 'OK')
+    },
+    (error) => {
+      this._snackBar.open(error, 'OK')
+      console.error('Registration error:', error);
+    }
+  )
 
 }
 
@@ -65,6 +70,10 @@ isDisabled() {
 @HostListener('document:keydown.enter', ['$event'])
 onEnter(event: KeyboardEvent) {
   this.register();
+}
+
+getIconCircleInfo() {
+  return this.iconsService.faCircleInfo;
 }
 
 }

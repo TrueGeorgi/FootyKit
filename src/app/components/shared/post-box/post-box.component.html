@@ -1,0 +1,43 @@
+<div class="main">
+    <div class="title">
+        <div>{{postItem.name}}</div>
+    </div>
+    <div class="pb-main-container">
+        <div class="image-main-container">
+            <div class="pic-container">
+                <img src="{{postItem.img}}" alt="Football kit">
+            </div>
+            <div class="buttons-container">
+                <button class="btn" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-like' : 'btn-like-disabled'">
+                    <fa-icon
+                    [icon]="getIconThumbsUp()"
+                    ></fa-icon>
+                </button>
+                <button class="btn" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-dislike' : 'btn-dislike-disabled'">
+                    <fa-icon
+                    [icon]="getIconThumbsDown()"
+                    ></fa-icon>
+                </button>
+                <div class="likes-count" [ngClass]="(getLikesDifference() >= 0) ? 'likes-positive' : 'likes-negative'">
+                    <div *ngIf="getLikesDifference() > 0">+</div>
+                    <div>{{ getLikesDifference() }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="comments-main-container">
+            <div class="input-main-container">
+                <mat-form-field class="comment-input">
+                    <mat-label>Leave a comment</mat-label>
+                    <textarea matInput placeholder="I love it..."></textarea>
+                  </mat-form-field>
+                <button class="btn-submit" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-submit-active' : 'btn-submit-disabled'">Submit</button>
+            </div>
+            <div class="show-comments-container">
+                <div class="comment">Comment 1</div>
+                <div class="comment">Comment 2</div>
+                <div class="comment">Comment 3</div>
+            </div>
+        </div>
+    </div>
+    
+</div>

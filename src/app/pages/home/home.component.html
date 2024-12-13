@@ -1,1 +1,5 @@
-<span></span>
+<div class="home-main-container">
+    <div *ngFor="let item of postItems" class="post-box">
+        <app-post-box [postItem]="item"></app-post-box>
+    </div>
+</div>

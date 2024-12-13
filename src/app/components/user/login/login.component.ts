@@ -3,7 +3,6 @@ import { AuthenticationService } from '../../../services/user/authentication.ser
 import { FormControl } from '@angular/forms';
 import { EmailInputComponent } from '../../shared/email-input/email-input.component';
 import { PasswordInputComponent } from '../../shared/password-input/password-input.component';
-import { User } from '../../../models/User';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -26,9 +25,12 @@ password: string = '';
 
 login(): void {
  this.authService.login(this.email.value, this.password)
- .subscribe(() => {
+ .subscribe(
+  () => {
   this.router.navigate(['home'])
- }, (error: any) => {
+  this._snackBar.open('User successfully logged', 'OK')
+ }, 
+ (error: any) => {
   this._snackBar.open('Invalid credentials', 'OK')
  });
   

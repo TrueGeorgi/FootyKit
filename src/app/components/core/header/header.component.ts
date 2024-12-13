@@ -27,12 +27,16 @@ export class HeaderComponent {
     this.router.navigate([''])
   }
 
-  loggout() {
-    this.authService.logout().then( () => {
+  logout() {
+    this.authService.logout().subscribe( () => {
         this.goHome();
       }
     );
     
+  }
+
+  existUser(): boolean {
+    return this.authService.isLogged();
   }
 
 }

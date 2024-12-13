@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/core/header/header.component';
@@ -7,8 +7,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from "./components/user/register/register.component";
 import { LoginComponent } from './components/user/login/login.component';
 import { AuthenticationService } from './services/user/authentication.service';
-import { getAuth } from 'firebase/auth';
-import { firebaseConfig } from '../environments/firebaseConfig';
 
 @Component({
   selector: 'app-root',
@@ -24,10 +22,11 @@ import { firebaseConfig } from '../environments/firebaseConfig';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
-  constructor(private authService: AuthenticationService) {
-    firebaseConfig
+  private authService = inject(AuthenticationService);
+
+  ngOnInit(): void {
   }
 
 }
