@@ -4,7 +4,7 @@ export interface PostItem {
     id: string;
     name: string;
     img: string;
-    likes: number;
-    dislikes: number;
-    // comments: PostComment[];
+    likedBy: string[];
+    dislikedBy: string[];
+    creator: string | null | undefined;
 }

@@ -1,0 +1,14 @@
+<div class="form-container">
+    <span class="create">Create a post</span>
+    <form class="form">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="min 6 & max 40 characters" [formControl]="title" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>URL</mat-label>
+            <input matInput placeholder="https://..." [formControl]="url" required>
+        </mat-form-field>
+        <button (click)="post()" mat-raised-button>Post</button>
+    </form>
+</div>

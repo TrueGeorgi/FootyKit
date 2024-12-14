@@ -9,11 +9,19 @@ import { firebaseConfig } from '../environments/firebaseConfig';
 // import { getFirestore } from 'firebase/firestore'
 import 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
+import admin from 'firebase-admin';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+
 export const auth = getAuth(firebaseApp);
-export const db = getFirestore(firebaseApp)
+export const db = getFirestore(firebaseApp);
+
+
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync()]
 };
+
+

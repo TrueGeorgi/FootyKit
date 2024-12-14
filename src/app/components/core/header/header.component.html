@@ -1,11 +1,13 @@
 <mat-toolbar>
     <span (click)="goHome()" class="title">FootyKits</span>
     <span class="example-spacer"></span>
-    <div *ngIf="!existUser()" class="nav">
+    <div *ngIf="!existUser()" class="nav-out">
         <span (click)="goLogin()" class="login">LogIn</span>
         <span (click)="goRegister()" class="register">Register</span>
     </div>
-    <div *ngIf="existUser()" class="nav">
+    <div *ngIf="existUser()" class="nav-in">
+        <fa-icon class="new-post" [icon]="getSquarePlusIcon()" [matTooltip]="'Create a new post'" (click)="goToCreate()"></fa-icon>
+        <fa-icon class="new-post" [icon]="getUserIcon()" [matTooltip]="'Your world'" (click)="goToUserProfile()"></fa-icon>
         <span (click)="logout()" class="logout">Logout</span>
     </div>
 </mat-toolbar>

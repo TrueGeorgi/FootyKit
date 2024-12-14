@@ -1,0 +1,35 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 12px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.create {
+    display: block;
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+    color: #00dddd;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 2px solid #00dddd;
+    letter-spacing: 1px;
+}
+
+
+.form {
+    padding: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+

@@ -5,6 +5,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { DbService } from '../../../services/db/db.service';
 import { PostItemService } from '../../../services/db/dbServices/post-item.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -13,13 +14,13 @@ import { PostItemService } from '../../../services/db/dbServices/post-item.servi
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  constructor(library: FaIconLibrary, private postItemService: PostItemService) {
+  constructor(library: FaIconLibrary, private postItemService: PostItemService, private router: Router) {
     library.addIcons(
       faGithub
     );
   }
 
-  test() {
-    this.postItemService.getPostItems();
+  goToAboutMe() {
+    this.router.navigate(['about-me'])
   }
 }

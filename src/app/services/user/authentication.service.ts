@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence, onAuthStateChanged, UserCredential } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence, onAuthStateChanged, UserCredential, updateProfile } from "firebase/auth";
 import { catchError, from, map, Observable, throwError } from 'rxjs';
 import { auth } from '../../app.config';
+import { Router } from '@angular/router';
 
 
 
@@ -13,16 +14,16 @@ export class AuthenticationService {
   private userLogged: boolean = false;
 
 
-  constructor() {
+  constructor(private router: Router) {
     setPersistence(auth, browserSessionPersistence).then(() => {
-      if(this.user$) {
+      if(auth.currentUser) {
         this.userLogged = true;
       } else {
         this.userLogged = false;
       }
     })
     .catch(error => {
-      if(this.user$) {
+      if(auth.currentUser) {
         this.userLogged = true;
       } else {
         this.userLogged = false;
@@ -30,28 +31,6 @@ export class AuthenticationService {
       console.error("Error setting session persistence:", error);
     });
    }
-
-  // async register(email: string, password: string, passwordRepeated: string): Promise<string> {
-  //   if (password !== passwordRepeated) {
-  //     return Promise.reject("Passwords don't match");
-  //   }
-
-  //   try {
-  //     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  //     return `User registered successfully: ${userCredential.user.email}`;
-  //   } catch (error: any) {
-  //     switch (error.code) {
-  //       case 'auth/email-already-in-use':
-  //         return Promise.reject('Email already in use');
-  //       case 'auth/invalid-email':
-  //         return Promise.reject('Invalid email address');
-  //       case 'auth/weak-password':
-  //         return Promise.reject('Password is too weak');
-  //       default:
-  //         return Promise.reject('An unknown error occurred');
-  //     }
-  //   }
-  // }
 
   register(email: string, password: string, passwordRepeated: string): Observable<UserCredential> {
 
@@ -62,6 +41,7 @@ export class AuthenticationService {
     return from(createUserWithEmailAndPassword(auth, email, password)).pipe(
       map((userCredential) => {
         console.log(`User registered successfully: ${userCredential.user.email}`);
+        this.login(email, password)
         return userCredential;
       }),
       catchError((error) => {
@@ -80,6 +60,7 @@ export class AuthenticationService {
         return throwError(() => new Error(errorMessage));
       })
     );
+    
   }
 
   login(email: string, password: string): Observable<void> {
@@ -93,7 +74,7 @@ export class AuthenticationService {
     return from(promise)
   }
 
-  isLogged() {
+  isLogged(): boolean {
     if(this.userLogged) {
       return true;
     } else {
@@ -101,12 +82,62 @@ export class AuthenticationService {
     }
   }
 
-  noUser() {
+  noUser(): boolean {
     if(!this.userLogged) {
       return true;
     } else {
       return false
     }
+  }
+
+  getUserEmail(): string | null | undefined {
+    return auth.currentUser?.email
+  }
+
+  setNickname(nickname: string): void {
+    if(auth.currentUser) {
+      updateProfile(auth.currentUser, {displayName: nickname}).then(() => {
+        return auth.currentUser?.displayName
+      }).catch((error) => {
+        return error
+      })
+    }
+  }
+
+  getNickname(): string {
+    if (auth.currentUser?.displayName) {
+      return auth.currentUser?.displayName
+    } else {
+      return ''
+    }
+    
+  }
+
+  getUserId(): string | null {
+    if(auth.currentUser) {
+      return auth.currentUser?.uid;
+    } else {
+      return null
+    }
+  }
+
+  deleteProfile(userId: string): boolean {
+   
+    
+
+    if(auth.currentUser) {
+      auth.currentUser.delete().then(()=>{
+        console.log('Success !!!');
+        this.logout()
+        this.router.navigate([''])
+        return true
+      }).catch((error)=>{ 
+       console.log("Error: ", error);
+       return false
+      })
+    }
+
+    return false
   }
 
 }

@@ -1,19 +1,20 @@
-<div class="main">
+<div class="main" [ngClass]="showConfirmDialog ? 'dialog-opens' : ''">
     <div class="title">
-        <div>{{postItem.name}}</div>
+        <div (click)="showPath ? goToSinglePage() : null" [ngClass]=" showPath ? 'title-button': null"  [matTooltip]="showPath ? 'View more' : null"  >{{postItem.name}}</div>
+        <fa-icon class="trash-can" *ngIf="showDelete" [icon]="getTrashCan()" (click)="openDialog()"></fa-icon>
     </div>
-    <div class="pb-main-container">
+    <div class="pb-main-container" >
         <div class="image-main-container">
             <div class="pic-container">
                 <img src="{{postItem.img}}" alt="Football kit">
             </div>
             <div class="buttons-container">
-                <button class="btn" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-like' : 'btn-like-disabled'">
+                <button class="btn" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-like' : 'btn-like-disabled'" (click)="like()">
                     <fa-icon
                     [icon]="getIconThumbsUp()"
                     ></fa-icon>
                 </button>
-                <button class="btn" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-dislike' : 'btn-dislike-disabled'">
+                <button class="btn" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-dislike' : 'btn-dislike-disabled'" (click)="dislike()">
                     <fa-icon
                     [icon]="getIconThumbsDown()"
                     ></fa-icon>
@@ -39,5 +40,11 @@
             </div>
         </div>
     </div>
-    
+    <div *ngIf="showConfirmDialog" class="confirm-dialog">
+        <div class="dialog-content">
+            <p>Are you sure that you want to delete "{{postItem.name}}"?</p>
+            <button class="del-btn" (click)="deletePost(postItem.id)">Yes</button>
+            <button class="del-btn" (click)="cancelDelete()">Cancel</button>
+        </div>
+    </div>
 </div>

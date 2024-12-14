@@ -8,11 +8,27 @@
     font-size: 20px;
   }
 
-  .nav {
+  .nav-out {
     display: flex;
     justify-content: space-between;
     width: 135px;
   }
+
+  .nav-in {
+    display: flex;
+    justify-content: space-between;
+    width: 155px;
+  }
+
+  .new-post {
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  .new-post:active {
+    transform: scale(0.95);
+  }
+
 
   .login:hover, .register:hover, .logout:hover, .title {
     cursor: pointer;

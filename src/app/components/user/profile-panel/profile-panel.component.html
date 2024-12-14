@@ -1,0 +1,38 @@
+<div class="profile-container" [ngClass]="showConfirmDialog ? 'dialog-opens' : ''">
+    <span class="title">
+        <span>Profile of: </span>
+        <span>{{ getNickname() }}</span>
+    </span>
+    <div class="info-container">
+        <div class="info">
+            <span>Email: </span>
+            <span>{{ getEmail() }}</span>
+        </div>
+        <div class="info">
+            <span>Own posts: </span>
+            <span (click)="getOwnPosts()">{{postedPosts.length}}</span>
+        </div>
+        <form (ngSubmit)="updateNickname()">
+            <mat-form-field>
+                <mat-label>Set nickname</mat-label>
+                <input matInput 
+                       placeholder="min 1 & max 16 characters" 
+                       [formControl]="nickname" 
+                       required 
+                       (keydown.enter)="updateNickname()">
+            </mat-form-field>
+            <button (click)="updateNickname()" type="submit" mat-raised-button>Update</button>
+        </form>
+        <button [ngClass]="showConfirmDialog ? 'dialog-opens' : ''" 
+                class="delete-button" 
+                (click)="openDeleteDialog()">Delete Profile</button>
+    </div>
+</div>
+
+<div *ngIf="showConfirmDialog" class="confirm-dialog">
+    <div class="dialog-content">
+        <p>Are you sure you want to delete your profile?</p>
+        <button class="del-btn" (click)="deleteProfile()">Yes</button>
+        <button class="del-btn" (click)="cancelDelete()">Cancel</button>
+    </div>
+</div>
