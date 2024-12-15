@@ -1,14 +1,22 @@
 # FootyKit
-A platform for football kits enthusiasts to share news, updates, and ideas for football kits, or to brag about their new Kit.
+A platform for football kit enthusiasts to share news, updates, and ideas, or to brag about their latest kit.
+Created as part of my Angular course exam at SoftUni.bg.
 
-I have created FootyKit for the exam project for the course Angular by SoftUni.bg
+### Key Features
+* Non-users can see all the posts but cannot interact with them (e.g., like, comment) or create new ones.
+* User-only features:
+  * Can create new posts.
+  * Can interact with other posts via likes and comments.
+  * Have access to a personal page.
+  * Can manage their private information.
+  * Can manage their posts.
 
-### New dependancies
-Typescript
-Angular material
-Font Awesome
-Firebase Firestore
-Firebase authentication
+### Dependencies
+* Typescript
+* Angular material
+* Font Awesome
+* Firebase Firestore
+* Firebase authentication
 
-## NB:
-as the perpose of this project is educational, the keys and tokens for firebase are uploaded with the project.
+## Note:
+This is an educational project. As such, Firebase keys and tokens are included in the repository.
