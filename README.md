@@ -9,7 +9,7 @@ Created as part of my Angular course exam at SoftUni.bg.
 * Manage your posts
 * Choose your nickname
 * Manage your profile
-* None registered-users can see all the posts, but cannot interact with them, nor create new ones.
+* Non-registered users can see all the posts, but cannot interact with them, nor create new ones.
 
 ### Dependencies
 * TypeScript
