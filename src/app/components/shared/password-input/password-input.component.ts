@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output, signal, WritableSignal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -16,18 +16,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class PasswordInputComponent {
 
   @Input() passwordMessage: String = '';
-  @Output() passwordChange = new EventEmitter<string>();
+  @Output() passwordChange : EventEmitter<string> = new EventEmitter<string>();
   
   password: string = '';
 
-  hide = signal(true);
+  hide: WritableSignal<boolean> = signal(true);
   
-  changeInputView(event: MouseEvent) {
+  changeInputView(event: MouseEvent): void {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
 
-  onPasswordChange() {
+  onPasswordChange(): void {
     this.passwordChange.emit(this.password);
   }
 

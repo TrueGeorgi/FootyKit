@@ -29,14 +29,13 @@
             <div class="input-main-container">
                 <mat-form-field class="comment-input">
                     <mat-label>Leave a comment</mat-label>
-                    <textarea matInput placeholder="I love it..."></textarea>
+                    <textarea [formControl]="comment" matInput placeholder="I love it..."></textarea>
                   </mat-form-field>
-                <button class="btn-submit" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-submit-active' : 'btn-submit-disabled'">Submit</button>
+                <button (click)="addComment()" class="btn-submit" [matTooltip]="!existUser() ? 'You must be logged in' : null" [ngClass]="existUser() ? 'btn-submit-active' : 'btn-submit-disabled'">Submit</button>
             </div>
             <div class="show-comments-container">
-                <div class="comment">Comment 1</div>
-                <div class="comment">Comment 2</div>
-                <div class="comment">Comment 3</div>
+                <div class="comment">{{getLastComment()}}</div>
+                <div class="comment">{{getBeforeLastComment()}}</div>
             </div>
         </div>
     </div>

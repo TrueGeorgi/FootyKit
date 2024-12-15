@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconsService } from '../../../services/icons.service';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-not-found',
@@ -13,7 +14,7 @@ export class NotFoundComponent {
 
   }
 
-  getBanIcon() {
+  getBanIcon(): IconDefinition {
     return this.iconsService.faBan;
   }
 }

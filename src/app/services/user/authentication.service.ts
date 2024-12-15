@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence, onAuthStateChanged, UserCredential, updateProfile } from "firebase/auth";
-import { catchError, from, map, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, from, map, Observable, throwError } from 'rxjs';
 import { auth } from '../../app.config';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   user$ = auth.currentUser;
   private userLogged: boolean = false;
+  private isLogged$ = new BehaviorSubject<boolean>(!!auth.currentUser);
 
 
   constructor(private router: Router) {
@@ -31,6 +32,7 @@ export class AuthenticationService {
       console.error("Error setting session persistence:", error);
     });
    }
+   
 
   register(email: string, password: string, passwordRepeated: string): Observable<UserCredential> {
 
@@ -75,7 +77,7 @@ export class AuthenticationService {
   }
 
   isLogged(): boolean {
-    if(this.userLogged) {
+    if(auth.currentUser) {
       return true;
     } else {
       return false

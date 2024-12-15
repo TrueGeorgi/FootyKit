@@ -36,7 +36,8 @@ private selectedPost: PostItem;
           img: doc.data()['img'],
           likedBy: doc.data()['likedBy'],
           dislikedBy: doc.data()['dislikedBy'],
-          creator: doc.data()['creator']
+          creator: doc.data()['creator'],
+          comments: doc.data()['comments']
         }
 
         this.posts$.push(this.singlePost$);
@@ -60,7 +61,8 @@ private selectedPost: PostItem;
             img: doc.data()['img'],
             likedBy: doc.data()['likedBy'],
             dislikedBy: doc.data()['dislikedBy'],
-            creator: doc.data()['creator']
+            creator: doc.data()['creator'],
+            comments: doc.data()['comments']
           }
 
           this.posts$.push(this.singlePost$);
@@ -89,11 +91,11 @@ private selectedPost: PostItem;
     return this.selectedPost;
   } 
 
-  addPost(postItem: PostItem) {
+  addPost(postItem: PostItem): void {
     this.posts$.push(postItem);
   }
 
-  deletePost(id: string) {
+  deletePost(id: string): Observable<boolean> {
     const postRef = doc(collection(db, this.COLLECTION_NAME), id);
     return from(
       deleteDoc(postRef).then(() => {
@@ -106,15 +108,18 @@ private selectedPost: PostItem;
     );
   }
 
-  editPost(postItem: PostItem) {
+  editPost(postItem: PostItem): Observable<void> {
     const docRef = doc(collection(db, this.COLLECTION_NAME), postItem.id);
+    console.log(postItem);
+    
    
     let dto: PostItemPostDTO = {
       name: postItem.name,
       img: postItem.img,
       creator: postItem.creator,
       likedBy: postItem.likedBy,
-      dislikedBy: postItem.dislikedBy
+      dislikedBy: postItem.dislikedBy,
+      comments: postItem.comments
     } 
     const promise = setDoc(docRef, dto);
     return from(promise);

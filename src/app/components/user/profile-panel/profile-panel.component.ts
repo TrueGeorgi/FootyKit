@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -22,7 +22,7 @@ export class ProfilePanelComponent {
   @Output() postedPostsEmit = new EventEmitter<PostItem[]>();
 
  nickname: FormControl = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]);
- errorMessage = signal('');
+ errorMessage: WritableSignal<string> = signal('');
  showConfirmDialog: boolean = false;
  postedPosts: PostItem[] = [];
  likedPosts: PostItem[] = [];
@@ -37,11 +37,11 @@ export class ProfilePanelComponent {
           .subscribe(() => this.updateErrorMessage(this.nickname));
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.postedPosts = this.postItemService.getPostItemsByCreator(this.authService.getUserEmail()!);
   }
 
-  updateErrorMessage(control: FormControl<any>) {
+  updateErrorMessage(control: FormControl<any>): void {
     if (control.hasError('required')) {
       this.errorMessage.set('You must enter a value');
     } else if (control.hasError('minlength')) {
@@ -53,22 +53,23 @@ export class ProfilePanelComponent {
     }
   }
 
-  getEmail() {
+  getEmail(): string | null | undefined {
     return this.authService.getUserEmail();
   }
 
- getOwnPosts() {
+ getOwnPosts(): void {
   this.router.navigate(['posted-posts'], {
     state: { postItems: this.postedPosts }
   });
 }
 
 
-  updateNickname() {
+  updateNickname(): void {
     if(this.nickname.valid) {
       this.authService.setNickname(this.nickname.value)
     }
     this.getNickname();
+    this.router.navigate(['profile'])
   }
 
   getNickname(): string | null {
@@ -80,15 +81,15 @@ export class ProfilePanelComponent {
     }
   }
 
-  openDeleteDialog() {
+  openDeleteDialog(): void {
     this.showConfirmDialog = true;
   }
 
-  cancelDelete() {
+  cancelDelete(): void {
     this.showConfirmDialog = false;
   }
 
-  deleteProfile() {
+  deleteProfile(): void {
     this.authService.deleteProfile(this.authService.getUserId()!);
   }
 }

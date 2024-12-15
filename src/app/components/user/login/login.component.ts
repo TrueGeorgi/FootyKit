@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { EmailInputComponent } from '../../shared/email-input/email-input.component';
 import { PasswordInputComponent } from '../../shared/password-input/password-input.component';
 import { Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent {
 constructor(private authService: AuthenticationService, private router: Router) {
     
 }
-private _snackBar = inject(MatSnackBar)
+private _snackBar: MatSnackBar = inject(MatSnackBar)
 
 email: FormControl = new FormControl()
 password: string = '';
@@ -36,20 +36,20 @@ login(): void {
   
 }
 
-onEmailChange(event: FormControl<string>) {
+onEmailChange(event: FormControl<string>): void {
   this.email = event;
 }
 
-onPasswordChange(event: string) {
+onPasswordChange(event: string): void {
   this.password = event;  
 }
 
-isDisabled() {
+isDisabled(): boolean {
   return this.email.invalid || !this.email.value;
 }
 
 @HostListener('document:keydown.enter', ['$event'])
-onEnter(event: KeyboardEvent) {
+onEnter(event: KeyboardEvent): void {
   this.login();
 }
 }

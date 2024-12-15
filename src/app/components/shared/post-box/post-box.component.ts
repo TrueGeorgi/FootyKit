@@ -10,12 +10,13 @@ import { PostItem } from '../../../models/PostItem';
 import { Router } from '@angular/router';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { PostItemService } from '../../../services/db/dbServices/post-item.service';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-post-box',
-  imports: [MatGridListModule, MatInputModule, CommonModule, FontAwesomeModule, MatTooltipModule],
+  imports: [MatGridListModule, MatInputModule, CommonModule, FontAwesomeModule, MatTooltipModule, ReactiveFormsModule],
   templateUrl: './post-box.component.html',
   styleUrl: './post-box.component.scss'
 })
@@ -25,6 +26,7 @@ export class PostBoxComponent {
   @Input() showDelete: boolean;
 
   showConfirmDialog: boolean = false;
+  comment: FormControl<string | null> = new FormControl('');
 
   constructor(
     private authService: AuthenticationService, 
@@ -62,11 +64,11 @@ export class PostBoxComponent {
     return this.iconsService.faTrashCan;
   }
 
-  openDialog() {
+  openDialog(): void {
     this.showConfirmDialog = true;
   }
 
-  deletePost(postItemId: string) {
+  deletePost(postItemId: string): void {
     this.postItemService.deletePost(postItemId).subscribe(() => {
       this.showConfirmDialog = false;
       this.router.navigate(['profile'])
@@ -76,11 +78,11 @@ export class PostBoxComponent {
     })
   }
 
-  cancelDelete() {
+  cancelDelete(): void {
     this.showConfirmDialog = false;
   }
 
-  like() {
+  like(): void {
     const userId = this.authService.getUserId()!;
     
     this.postItem.dislikedBy = this.postItem.dislikedBy.filter(d => d !== userId);
@@ -94,7 +96,7 @@ export class PostBoxComponent {
     this.postItemService.editPost(this.postItem);
   }
   
-  dislike() {
+  dislike(): void {
     const userId = this.authService.getUserId()!;
     
     this.postItem.likedBy = this.postItem.likedBy.filter(l => l !== userId);
@@ -106,5 +108,31 @@ export class PostBoxComponent {
     }
   
     this.postItemService.editPost(this.postItem);
+  }
+
+  getLastComment(): string | null {
+    if(this.postItem.comments.length !== 0) {
+      return this.postItem.comments[this.postItem.comments.length - 1]
+    }
+    return null
+  }
+
+  addComment(): void {
+
+    if(this.comment.value !== null && this.comment.value.trim().length > 0) {
+      console.log('Is in');
+      
+      this.postItem.comments.push(this.comment.value)
+      this.postItemService.editPost(this.postItem);
+      this.comment.reset();
+    }
+    
+  }
+
+  getBeforeLastComment(): string | null {
+    if(this.postItem.comments.length > 1) {
+      return this.postItem.comments[this.postItem.comments.length - 2]
+    }
+    return null
   }
 }

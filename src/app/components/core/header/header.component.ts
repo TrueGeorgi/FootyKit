@@ -18,27 +18,27 @@ export class HeaderComponent {
   constructor(private router: Router, private authService: AuthenticationService, private iconsService: IconsService) {
 
   }
-  goLogin() {
+  goLogin(): void {
     this.router.navigate(['login'])
   }
 
-  goRegister() {
+  goRegister(): void {
     this.router.navigate(['register'])
   }
 
-  goHome() {
+  goHome(): void {
     this.router.navigate([''])
   }
 
-  goToCreate() {
+  goToCreate(): void {
     this.router.navigate(['createPost'])
   }
 
-  goToUserProfile() {
+  goToUserProfile(): void {
     this.router.navigate(['profile'])
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout().subscribe( () => {
         this.goHome();
       }

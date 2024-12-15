@@ -45,6 +45,18 @@ form {
     color: #666;
 }
 
+.own-posts-number {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .own-posts-number:hover {
+    color: #0056b3;
+    text-decoration: none;
+  }
+
 .mat-form-field {
     width: 100%;
 }

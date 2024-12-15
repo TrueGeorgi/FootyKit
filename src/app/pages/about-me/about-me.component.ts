@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { IconsService } from '../../services/icons.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class AboutMeComponent {
     );
   }
 
-  getEnvelopeIcon() {
+  getEnvelopeIcon(): IconDefinition {
     return this.iconsService.faEnvelope;
   }
 }

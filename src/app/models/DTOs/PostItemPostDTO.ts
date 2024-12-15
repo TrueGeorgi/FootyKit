@@ -6,4 +6,5 @@ export interface PostItemPostDTO {
     creator: string | null | undefined;
     likedBy: string[];
     dislikedBy: string [];
+    comments: string [];
 }

@@ -10,7 +10,7 @@
         </div>
         <div class="info">
             <span>Own posts: </span>
-            <span (click)="getOwnPosts()">{{postedPosts.length}}</span>
+            <span class="own-posts-number" (click)="getOwnPosts()">{{postedPosts.length}}</span>
         </div>
         <form (ngSubmit)="updateNickname()">
             <mat-form-field>

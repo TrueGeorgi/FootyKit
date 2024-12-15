@@ -1,4 +1,3 @@
-import { PostComment } from "./PostComment";
 
 export interface PostItem {
     id: string;
@@ -7,4 +6,5 @@ export interface PostItem {
     likedBy: string[];
     dislikedBy: string[];
     creator: string | null | undefined;
+    comments: string [];
 }

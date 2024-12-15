@@ -20,7 +20,7 @@ export class FooterComponent {
     );
   }
 
-  goToAboutMe() {
+  goToAboutMe(): void {
     this.router.navigate(['about-me'])
   }
 }

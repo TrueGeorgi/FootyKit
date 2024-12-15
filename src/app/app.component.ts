@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/core/header/header.component';
 import { FooterComponent } from './components/core/footer/footer.component';
-import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from "./components/user/register/register.component";
-import { LoginComponent } from './components/user/login/login.component';
 import { AuthenticationService } from './services/user/authentication.service';
 
 @Component({
@@ -14,9 +11,6 @@ import { AuthenticationService } from './services/user/authentication.service';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
-    RegisterComponent,
-    LoginComponent,
     CommonModule,
 ],
   templateUrl: './app.component.html',

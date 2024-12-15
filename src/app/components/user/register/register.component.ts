@@ -4,7 +4,7 @@ import { EmailInputComponent } from "../../shared/email-input/email-input.compon
 import { PasswordInputComponent } from "../../shared/password-input/password-input.component";
 import { AuthenticationService } from '../../../services/user/authentication.service';
 import { FormControl } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, IconDefinition } from '@fortawesome/angular-fontawesome';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -23,7 +23,7 @@ export class RegisterComponent {
     
   }
   
-_snackBar = inject(MatSnackBar);
+_snackBar: MatSnackBar = inject(MatSnackBar);
 
 passwordMessage: string = "Enter your password"
 repeatPasswordMessage: string = "Repeat the password"
@@ -51,28 +51,28 @@ register(): void {
 
 }
 
-onEmailChange(event: FormControl<string>) {
+onEmailChange(event: FormControl<string>): void {
   this.email = event;
 }
 
-onPasswordChange(event: string) {
+onPasswordChange(event: string): void {
   this.password = event;
 }
 
-onRepeatPasswordChange(event: string) {
+onRepeatPasswordChange(event: string): void {
   this.repeatedPassword = event
 }
 
-isDisabled() {
+isDisabled(): boolean {
   return this.email.invalid || !this.email.value;
 }
 
 @HostListener('document:keydown.enter', ['$event'])
-onEnter(event: KeyboardEvent) {
+onEnter(event: KeyboardEvent): void {
   this.register();
 }
 
-getIconCircleInfo() {
+getIconCircleInfo(): IconDefinition {
   return this.iconsService.faCircleInfo;
 }
 

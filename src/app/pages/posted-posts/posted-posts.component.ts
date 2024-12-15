@@ -15,7 +15,7 @@ export class PostedPostsComponent {
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (history.state.postItems) {
       this.postItems = history.state.postItems;
     }

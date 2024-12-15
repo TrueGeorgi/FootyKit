@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -24,8 +24,8 @@ import { Router } from '@angular/router';
 export class CreatePostComponent {
   title: FormControl = new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]);
   url: FormControl = new FormControl('', Validators.required);
-  errorMessage = signal('');
-  private _snackbar = inject(MatSnackBar);
+  errorMessage: WritableSignal<string> = signal('');
+  private _snackbar: MatSnackBar = inject(MatSnackBar);
 
   constructor(private authService: AuthenticationService, private postItemService: PostItemService, private router: Router) {
        merge(this.title.statusChanges, this.title.valueChanges)
@@ -37,7 +37,7 @@ export class CreatePostComponent {
         .subscribe(() => this.updateErrorMessage(this.url));
   }
 
-  updateErrorMessage(control: FormControl<any>) {
+  updateErrorMessage(control: FormControl<any>): void {
     if (control.hasError('required')) {
       this.errorMessage.set('You must enter a value');
     } else if (control.hasError('minlength')) {
@@ -49,14 +49,15 @@ export class CreatePostComponent {
     }
   }
 
-  post() {
+  post(): void {
     if (this.title.valid && this.url.valid) {
       let postItemDTO: PostItemPostDTO = {
         name: this.title.value,
         img: this.url.value,
         creator: this.authService.getUserEmail(),
         likedBy: [],
-        dislikedBy: []
+        dislikedBy: [],
+        comments: []
       };
 
       this.postItemService.addPostItem(postItemDTO).subscribe(addedItemId => {
@@ -66,7 +67,8 @@ export class CreatePostComponent {
           img: this.url.value,
           likedBy: [],
           dislikedBy: [],
-          creator: this.authService.getUserEmail()
+          creator: this.authService.getUserEmail(),
+          comments: []
         }
 
         this.postItemService.addPost(postItem);
@@ -81,7 +83,7 @@ export class CreatePostComponent {
     }
   }
 
-  showUnable() {
+  showUnable(): void {
 
   }
 }

@@ -14,7 +14,7 @@ export class SinglePostComponent {
 
     constructor(private postItemService: PostItemService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
       this.postItem = this.postItemService.getLocalPost();
     }
 }
